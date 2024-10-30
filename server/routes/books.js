@@ -13,11 +13,16 @@ router.get("/", async (req, res) => {
 
 // Add a new book
 router.post("/", upload.single("coverImage"), async (req, res) => {
-    const { title, author, read } = req.body;
-    const coverImage = req.file ? req.file.path : null;
-    const newBook = new Book({ title, author, coverImage, read });
-    await newBook.save();
-    res.json(newBook);
+    try {
+        const { title, author, read } = req.body;
+        const coverImage = req.file ? req.file.path : null;
+        const newBook = new Book({ title, author, coverImage, read });
+        await newBook.save();
+        res.json(newBook);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 module.exports = router;

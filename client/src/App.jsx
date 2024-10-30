@@ -14,7 +14,9 @@ function App() {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get("/api/books");
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/books`
+      );
       setBooks(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error("Error fetching books:", error);
@@ -31,7 +33,7 @@ function App() {
     formData.append("read", read);
 
     try {
-      await axios.post("/api/books", formData, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/books`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       fetchBooks();
@@ -40,7 +42,10 @@ function App() {
       setCoverImage(null);
       setRead(false);
     } catch (error) {
-      console.error("Error adding book:", error);
+      console.error(
+        "Error adding book:",
+        error.response ? error.response.data : error
+      );
     }
   };
 
