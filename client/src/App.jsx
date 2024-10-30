@@ -50,7 +50,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="p-8">
       <h1 className="text-3xl font-bold text-center mb-8">Book Catalogue</h1>
       <form
         onSubmit={handleSubmit}
@@ -104,12 +104,15 @@ function App() {
         <h2 className="text-2xl font-semibold mb-4">Books List</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {books?.map((book) => (
-            <div key={book._id} className="bg-white p-4 rounded-lg shadow-md">
+            <div
+              key={book._id}
+              className="bg-white text-black p-4 rounded-lg shadow-md"
+            >
               <h3 className="text-lg font-semibold">{book.title}</h3>
               <p className="text-gray-600">{book.author}</p>
               {book.coverImage && (
                 <img
-                  src={`http://localhost:5000/${book.coverImage}`}
+                  src={`${import.meta.env.VITE_API_URL}/${book.coverImage}`}
                   alt={book.title}
                   className="w-full h-48 object-cover rounded mt-2"
                 />

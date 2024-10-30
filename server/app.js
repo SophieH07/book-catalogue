@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const bookRoutes = require("./routes/books");
+const path = require("path");
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,8 @@ mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
+app.use(express.static('uploads'));
 
 app.use("/api/books", bookRoutes);
 

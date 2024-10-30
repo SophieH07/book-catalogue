@@ -1,9 +1,23 @@
 const express = require("express");
 const multer = require("multer");
+const path = require("path");
 const Book = require("../models/Book");
 
 const router = express.Router();
-const upload = multer({ dest: "uploads/" });
+
+// Save images
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/");
+    },
+    filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        const newFileName = Date.now() + ext;
+        cb(null, newFileName);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 // Get all books
 router.get("/", async (req, res) => {
@@ -11,17 +25,17 @@ router.get("/", async (req, res) => {
     res.json(books);
 });
 
-// Add a new book
+// Post a new book
 router.post("/", upload.single("coverImage"), async (req, res) => {
     try {
         const { title, author, read } = req.body;
-        const coverImage = req.file ? req.file.path : null;
+        const coverImage = req.file ? req.file.filename : null;
         const newBook = new Book({ title, author, coverImage, read });
         await newBook.save();
         res.json(newBook);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send("Internal Server Error");
     }
 });
 
