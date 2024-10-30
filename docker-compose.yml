@@ -1,0 +1,30 @@
+services:
+  mongodb:
+    image: mongo:5.0
+    container_name: book-catalogue-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+
+  backend:
+    build: ./backend
+    container_name: book-catalogue-backend
+    environment:
+      MONGO_URI: mongodb://root:example@mongodb:27017/bookCatalogue?authSource=admin
+      PORT: 5000
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    container_name: book-catalogue-frontend
+    environment:
+      VITE_BACKEND_URL: http://localhost:5000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend

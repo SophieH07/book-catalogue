@@ -15,7 +15,7 @@ function App() {
   const fetchBooks = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/books`
+        `${import.meta.env.VITE_BACKEND_URL}/api/books`
       );
       setBooks(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
@@ -33,9 +33,13 @@ function App() {
     formData.append("read", read);
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/books`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/books`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       fetchBooks();
       setTitle("");
       setAuthor("");
@@ -112,7 +116,7 @@ function App() {
               <p className="text-gray-600">{book.author}</p>
               {book.coverImage && (
                 <img
-                  src={`${import.meta.env.VITE_API_URL}/${book.coverImage}`}
+                  src={`${import.meta.env.VITE_BACKEND_URL}/${book.coverImage}`}
                   alt={book.title}
                   className="w-full h-48 object-cover rounded mt-2"
                 />
