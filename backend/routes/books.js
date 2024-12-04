@@ -22,7 +22,7 @@ const upload = multer({ storage: storage });
 
 // Get all books
 router.get("/books", async (req, res) => {
-    const books = await Book.find();
+    const books = await Book.find().sort({ createdAt: -1 });
     res.json(books);
 });
 
@@ -36,9 +36,9 @@ router.get("/book/:id", async (req, res) => {
 // Post a new book
 router.post("/", upload.single("coverImage"), async (req, res) => {
     try {
-        const { title, author, read } = req.body;
+        const { title, author, read, createdAt, updatedAt } = req.body;
         const coverImage = req.file ? req.file.filename : null;
-        const newBook = new Book({ title, author, coverImage, read });
+        const newBook = new Book({ title, author, coverImage, read, createdAt, updatedAt });
         await newBook.save();
         res.json(newBook);
     } catch (error) {
@@ -51,11 +51,11 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
 router.patch("/book/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const { read } = req.body;
+        const { read, updatedAt } = req.body;
 
         const updatedBook = await Book.findByIdAndUpdate(
             id,
-            { read },
+            { read, updatedAt },
             { new: true }
         );
 

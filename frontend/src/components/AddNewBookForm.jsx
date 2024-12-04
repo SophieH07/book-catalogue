@@ -8,12 +8,15 @@ export default function AddNewBookForm({ fetchBooks }) {
   const [read, setRead] = useState(false);
 
   const handleSubmit = async (e) => {
+    const date = new Date();
     e.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
     formData.append("author", author);
     formData.append("coverImage", coverImage);
     formData.append("read", read);
+    formData.append("createdAt", date);
+    formData.append("updatedAt", date);
 
     try {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api`, formData, {

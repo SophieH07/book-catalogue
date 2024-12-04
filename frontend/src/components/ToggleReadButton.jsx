@@ -1,11 +1,12 @@
 import axios from "axios";
-import { FiCheckSquare, FiSquare } from "react-icons/fi";
+import { FaCheckSquare, FaRegCheckSquare } from "react-icons/fa";
 
 export default function ToggleReadButton({ bookId, read, fetchBooks }) {
   const toggleReadStatus = async (id, currentReadStatus) => {
     try {
       await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/book/${id}`, {
         read: !currentReadStatus,
+        updatedAt: new Date(),
       });
       fetchBooks();
     } catch (error) {
@@ -13,19 +14,19 @@ export default function ToggleReadButton({ bookId, read, fetchBooks }) {
     }
   };
   return (
-    <>
+    <div className="flex gap-3">
       <button
         onClick={() => toggleReadStatus(bookId, read)}
         className="text-blue-500 hover:text-blue-700 transition"
         title="Toggle Read Status"
       >
         {read ? (
-          <FiCheckSquare className="h-5 w-5" />
+          <FaCheckSquare className="h-7 w-7" />
         ) : (
-          <FiSquare className="h-5 w-5" />
+          <FaRegCheckSquare className="h-7 w-7" />
         )}
       </button>
-      <p className="mt-2">{read ? "Read" : "Unread"}</p>
-    </>
+      <p className="mt-1">{read ? "Read" : "Unread"}</p>
+    </div>
   );
 }
