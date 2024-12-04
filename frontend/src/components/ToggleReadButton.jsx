@@ -26,7 +26,7 @@ export default function ToggleReadButton({ bookId, read, fetchBooks }) {
           <FaRegCheckSquare className="h-7 w-7" />
         )}
       </button>
-      <p className="mt-1">{read ? "Read" : "Unread"}</p>
+      <p className="mt-2">{read ? "Read" : "Unread"}</p>
     </div>
   );
 }

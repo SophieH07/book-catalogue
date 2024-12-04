@@ -4,9 +4,21 @@ import ToggleReadButton from "./components/ToggleReadButton";
 import { MdMenuBook } from "react-icons/md";
 
 export default function BookList({ books, fetchBooks }) {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  const formatDate = (date) => {
+    const parsedDate = new Date(date);
+    const formatter = new Intl.DateTimeFormat(undefined, {
+      timeZone: timeZone,
+      dateStyle: "short",
+      timeStyle: "short",
+    });
+    return formatter.format(parsedDate);
+  };
+
   return (
     <div className="mt-10">
-      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {books?.map((book) => (
           <div
             key={book._id}
@@ -30,6 +42,10 @@ export default function BookList({ books, fetchBooks }) {
                 fetchBooks={fetchBooks}
               />
               <DeleteButton bookId={book._id} fetchBooks={fetchBooks} />
+            </div>
+            <div>
+              <p>Added: {formatDate(book.createdAt)}</p>
+              <p>Last updated: {formatDate(book.updatedAt)}</p>
             </div>
           </div>
         ))}

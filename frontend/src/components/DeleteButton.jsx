@@ -17,7 +17,7 @@ export default function DeleteButton({ bookId, fetchBooks }) {
       className="bg-red-500 text-white p-2 rounded-full shadow hover:bg-red-600 transition"
       title="Delete Book"
     >
-      <MdDeleteForever />
+      <MdDeleteForever className="h-6 w-6" />
     </button>
   );
 }
