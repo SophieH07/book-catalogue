@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { MdDeleteForever } from "react-icons/md";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -33,13 +34,9 @@ function App() {
     formData.append("read", read);
 
     try {
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/books`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       fetchBooks();
       setTitle("");
       setAuthor("");
@@ -50,6 +47,15 @@ function App() {
         "Error adding book:",
         error.response ? error.response.data : error
       );
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/book/${id}`);
+      fetchBooks(); // Refresh the book list after deletion
+    } catch (error) {
+      console.error("Error deleting book:", error.response);
     }
   };
 
@@ -122,6 +128,13 @@ function App() {
                 />
               )}
               <p className="mt-2">{book.read ? "Read" : "Unread"}</p>
+              <button
+                onClick={() => handleDelete(book._id)}
+                className="bg-red-500 text-white p-2 rounded-full shadow hover:bg-red-600 transition"
+                title="Delete Book"
+              >
+                <MdDeleteForever />
+              </button>
             </div>
           ))}
         </div>
