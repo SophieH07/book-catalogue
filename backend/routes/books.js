@@ -26,6 +26,18 @@ router.get("/books", async (req, res) => {
     res.json(books);
 });
 
+//Get read/unread books
+router.get("/books/:read", async (req, res) => {
+    const { read } = req.params;
+    try {
+        const books = await Book.find({ read: read });
+        res.json(books);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 // Get book
 router.get("/book/:id", async (req, res) => {
     const { id } = req.params;
