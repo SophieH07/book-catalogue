@@ -47,6 +47,29 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
     }
 });
 
+// Update read status
+router.patch("/book/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { read } = req.body;
+
+        const updatedBook = await Book.findByIdAndUpdate(
+            id,
+            { read },
+            { new: true }
+        );
+
+        if (!updatedBook) {
+            return res.status(404).send("Book not found");
+        }
+
+        res.json(updatedBook);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 // Delete a book
 router.delete("/book/:id", async (req, res) => {
     try {
