@@ -38,12 +38,9 @@ export default function AddNewBookForm({ fetchBooks, showAddForm }) {
     <div
       className={`${
         showAddForm ? "flex items-center justify-center" : "hidden"
-      }  `}
+      }`}
     >
-      <form
-        onSubmit={handleSubmit}
-        className="bg-opacity-15 bg-white p-4 rounded-lg shadow-md"
-      >
+      <form onSubmit={handleSubmit}>
         <div className="grid gap-2 w-full mb-2 lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
           <div>
             <label>Title</label>

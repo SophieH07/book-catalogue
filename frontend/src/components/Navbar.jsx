@@ -9,13 +9,13 @@ export default function Navbar({ fetchBooks }) {
     setShowAddForm(!showAddForm);
   };
   return (
-    <div>
+    <>
       <Filter
         fetchBooks={fetchBooks}
         showAddForm={showAddForm}
         toggleShowAddForm={toggleShowAddForm}
       />
       <AddNewBookForm fetchBooks={fetchBooks} showAddForm={showAddForm} />
-    </div>
+    </>
   );
 }

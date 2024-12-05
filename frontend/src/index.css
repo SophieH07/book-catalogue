@@ -19,6 +19,7 @@ input {
 }
 
 form {
+  @apply bg-opacity-15 bg-white p-4 rounded-lg shadow-md;
   label {
     display: block;
   }
