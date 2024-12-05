@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function AddNewBookForm({ fetchBooks }) {
+export default function AddNewBookForm({ fetchBooks, showAddForm }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [coverImage, setCoverImage] = useState(null);
@@ -35,38 +35,39 @@ export default function AddNewBookForm({ fetchBooks }) {
     }
   };
   return (
-    <div className="flex items-center justify-center">
+    <div
+      className={`${
+        showAddForm ? "flex items-center justify-center" : "hidden"
+      }  `}
+    >
       <form
         onSubmit={handleSubmit}
         className="bg-opacity-15 bg-white p-4 rounded-lg shadow-md"
       >
         <div className="grid gap-2 w-full mb-2 lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
           <div>
-            <label className="block">Title</label>
+            <label>Title</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="mt-1 p-2 w-full border rounded"
               required
             />
           </div>
           <div>
-            <label className="block">Author</label>
+            <label>Author</label>
             <input
               type="text"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
-              className="mt-1 p-2 w-full border rounded"
               required
             />
           </div>
           <div>
-            <label className="block">Cover Image</label>
+            <label>Cover Image</label>
             <input
               type="file"
               onChange={(e) => setCoverImage(e.target.files[0])}
-              className="bg-white bg-opacity-50 mt-1 p-2 w-full border rounded cursor-pointer"
             />
           </div>
           <div
@@ -83,12 +84,7 @@ export default function AddNewBookForm({ fetchBooks }) {
           </div>
         </div>
         <div className="flex justify-center">
-          <button
-            type="submit"
-            className="w-2/4 bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
-          >
-            Add Book
-          </button>
+          <button type="submit">Add Book</button>
         </div>
       </form>
     </div>

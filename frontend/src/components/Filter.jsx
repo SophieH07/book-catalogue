@@ -1,30 +1,22 @@
 import { useEffect, useState } from "react";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
-export default function Filter({ fetchBooks }) {
+export default function Filter({ fetchBooks, showAddForm, toggleShowAddForm }) {
   const [filter, setFilter] = useState("all");
   useEffect(() => {
     fetchBooks(filter);
   }, [filter]);
 
   return (
-    <div className="flex gap-3 mt-2 mb-4 sm:mx-10 md:mx-14 lg:mx-20">
+    <div id="filter">
+      <button onClick={() => setFilter("all")}>All books</button>
+      <button onClick={() => setFilter(true)}>Read books</button>
+      <button onClick={() => setFilter(false)}>Unread books</button>
       <button
-        onClick={() => setFilter("all")}
-        className="w-1/3 bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+        className="inline-flex justify-center items-center gap-4"
+        onClick={() => toggleShowAddForm()}
       >
-        All books
-      </button>
-      <button
-        onClick={() => setFilter(true)}
-        className="w-1/3 bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
-      >
-        Read books
-      </button>
-      <button
-        onClick={() => setFilter(false)}
-        className="w-1/3 bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
-      >
-        Unread books
+        Add new book {showAddForm ? <FaArrowUp /> : <FaArrowDown />}
       </button>
     </div>
   );

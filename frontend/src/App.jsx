@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AddNewBookForm from "./components/AddNewBookForm";
 import BookList from "./BookList";
-import Filter from "./components/Filter";
+import Navbar from "./components/Navbar";
+import BookPic from "../public/book.png";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -32,9 +32,11 @@ function App() {
 
   return (
     <div className="w-full p-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Book Catalogue</h1>
-      <Filter fetchBooks={fetchBooks} />
-      <AddNewBookForm fetchBooks={fetchBooks} />
+      <div className="flex items-center justify-center mb-4">
+        <img src={BookPic} alt="Book Logo" className="max-h-16 max-w-16" />
+        <h1 className="text-3xl font-bold text-center">Book Catalogue</h1>
+      </div>
+      <Navbar fetchBooks={fetchBooks} />
       <BookList books={books} fetchBooks={fetchBooks} />
     </div>
   );
