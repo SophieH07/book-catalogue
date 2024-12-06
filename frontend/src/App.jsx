@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import BookList from "./BookList";
 import Navbar from "./components/Navbar";
-import BookPic from "../public/book.png";
+import BookPic from "/book.png";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -31,13 +31,13 @@ function App() {
   };
 
   return (
-    <div className="w-full p-8">
+    <div className="w-full p-4">
       <div className="flex items-center justify-center mb-4">
         <img src={BookPic} alt="Book Logo" className="max-h-16 max-w-16" />
         <h1 className="text-3xl font-bold text-center">Book Catalogue</h1>
       </div>
       <Navbar fetchBooks={fetchBooks} />
-      <BookList books={books} fetchBooks={fetchBooks} />
+      {books && <BookList books={books} fetchBooks={fetchBooks} />}
     </div>
   );
 }

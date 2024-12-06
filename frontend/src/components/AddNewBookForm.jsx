@@ -40,7 +40,7 @@ export default function AddNewBookForm({ fetchBooks, showAddForm }) {
         showAddForm ? "flex items-center justify-center" : "hidden"
       }`}
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-full lg:w-auto">
         <div className="grid gap-2 w-full mb-2 lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
           <div>
             <label>Title</label>

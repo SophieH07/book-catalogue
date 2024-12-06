@@ -19,7 +19,7 @@ export default function BookList({ books, fetchBooks }) {
   return (
     <div className="mt-10">
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {books?.map((book) => (
+        {books.map((book) => (
           <div
             key={book._id}
             className="bg-white bg-opacity-15 p-4 rounded-lg shadow-md"
@@ -30,10 +30,10 @@ export default function BookList({ books, fetchBooks }) {
               <img
                 src={`${import.meta.env.VITE_BACKEND_URL}/${book.coverImage}`}
                 alt={book.title}
-                className="w-full h-full max-h-44 md:max-h-64 min-h-14 object-cover rounded mt-2"
+                className="w-full h-full max-h-44 md:max-h-64 min-h-14 object-cover rounded mt-1"
               />
             ) : (
-              <MdMenuBook className="w-full h-full max-h-44 md:max-h-64 min-h-14 object-cover rounded mt-2" />
+              <MdMenuBook className="w-full h-full max-h-44 md:max-h-64 min-h-14 object-cover rounded mt-1" />
             )}
             <div className="flex justify-between pt-4">
               <ToggleReadButton
