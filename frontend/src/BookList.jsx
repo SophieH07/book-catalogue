@@ -18,11 +18,11 @@ export default function BookList({ books, fetchBooks }) {
 
   return (
     <div className="mt-10">
-      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {books.map((book) => (
           <div
             key={book._id}
-            className="bg-white bg-opacity-15 p-4 rounded-lg shadow-md"
+            className="min-h-fit bg-white bg-opacity-15 p-2 rounded-lg shadow-md"
           >
             <h3 className="text-lg font-semibold">{book.title}</h3>
             <p className="text-gray-200">{book.author}</p>
@@ -30,22 +30,22 @@ export default function BookList({ books, fetchBooks }) {
               <img
                 src={`${import.meta.env.VITE_BACKEND_URL}/${book.coverImage}`}
                 alt={book.title}
-                className="w-full h-full max-h-44 md:max-h-64 min-h-14 object-cover rounded mt-1"
+                className="w-full h-svh min-h-40 max-h-44 sm:max-h-64 md:max-h-72 object-cover rounded mt-1"
               />
             ) : (
-              <MdMenuBook className="w-full h-full max-h-44 md:max-h-64 min-h-14 object-cover rounded mt-1" />
+              <MdMenuBook className="w-full h-svh min-h-40 max-h-44 sm:max-h-64 md:max-h-72 object-cover rounded mt-1" />
             )}
-            <div className="flex justify-between pt-4">
+            <div className="py-2">
+              <p>Added: {formatDate(book.createdAt)}</p>
+              <p>Last updated: {formatDate(book.updatedAt)}</p>
+            </div>
+            <div className="flex justify-between my-0 md:my-2">
               <ToggleReadButton
                 bookId={book._id}
                 read={book.read}
                 fetchBooks={fetchBooks}
               />
               <DeleteButton bookId={book._id} fetchBooks={fetchBooks} />
-            </div>
-            <div>
-              <p>Added: {formatDate(book.createdAt)}</p>
-              <p>Last updated: {formatDate(book.updatedAt)}</p>
             </div>
           </div>
         ))}
