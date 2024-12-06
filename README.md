@@ -19,9 +19,9 @@ cd book-catalogue
 
 ## Prerequisites
 
-Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-Install [Node](https://nodejs.org/en/download/package-manager)
-Install [MongoDB](https://www.mongodb.com/try/download/community)
+Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)</br>
+Install [Node](https://nodejs.org/en/download/package-manager)</br>
+Install [MongoDB](https://www.mongodb.com/try/download/community)</br>
 
 ### Starting with Docker
 
