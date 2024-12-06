@@ -40,8 +40,8 @@ It may take some time to create everything.
 
 **Access the Application:**
 
-- Frontend: http://localhost:5173
-- Backend API for all books: http://localhost:5000/api/books
+- Frontend: http://localhost:39573
+- Backend API for all books: http://localhost:39500/api/books
 
 **Stopping the application**
 
