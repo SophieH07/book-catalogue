@@ -15,7 +15,7 @@ services:
       MONGO_URI: mongodb://root:example@mongodb:27017/bookCatalogue?authSource=admin
       PORT: 5000
     ports:
-      - "5000:5000"
+      - "39500:5000"
     depends_on:
       - mongodb
 
@@ -23,8 +23,9 @@ services:
     build: ./frontend
     container_name: book-catalogue-frontend
     environment:
-      VITE_BACKEND_URL: http://127.0.0.1:5000
+      VITE_BACKEND_URL: http://127.0.0.1:39500
+      VITE_PORT: 5173
     ports:
-      - "5173:5173"
+      - "39573:5173"
     depends_on:
       - backend

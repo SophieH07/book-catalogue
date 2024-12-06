@@ -73,7 +73,7 @@ npm install
 node app.js
 ```
 
-You can check the backend by this http://localhost:5000/api/books link, where you will see a JSON about the books you uploaded. At the beginning it will be empty.
+You can check the backend by this http://localhost:39500/api/books link, where you will see a JSON about the books you uploaded. At the beginning it will be empty.
 
 **Start frontend**
 
@@ -83,4 +83,4 @@ npm install
 npm run dev
 ```
 
-The frontend should be available on http://localhost:5173.
+The frontend should be available on http://localhost:39573.
