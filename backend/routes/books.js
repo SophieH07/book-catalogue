@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const fs = require('fs');
+const fs = require("fs");
 const Book = require("../models/Book");
 
 const router = express.Router();
@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
         const ext = path.extname(file.originalname);
         const newFileName = Date.now() + ext;
         cb(null, newFileName);
-    }
+    },
 });
 
 const upload = multer({ storage: storage });
@@ -53,7 +53,7 @@ router.get("/books/:read", async (req, res) => {
     }
 });
 
-// Get book
+// Get book by id
 router.get("/book/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -75,7 +75,14 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
     try {
         const { title, author, read, createdAt, updatedAt } = req.body;
         const coverImage = req.file ? req.file.filename : null;
-        const newBook = new Book({ title, author, coverImage, read, createdAt, updatedAt });
+        const newBook = new Book({
+            title,
+            author,
+            coverImage,
+            read,
+            createdAt,
+            updatedAt,
+        });
         await newBook.save();
         res.json(newBook);
     } catch (error) {
@@ -107,12 +114,11 @@ router.patch("/book/:id", async (req, res) => {
     }
 });
 
-// Delete a book
+// Delete a book by id
 router.delete("/book/:id", async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Find the book by ID
         const book = await Book.findById(id);
         if (!book) {
             return res.status(404).send("Book not found");
@@ -121,13 +127,11 @@ router.delete("/book/:id", async (req, res) => {
         // Remove the cover image file if it exists
         if (book.coverImage) {
             const filePath = path.join(__dirname, "../uploads/", book.coverImage);
-            console.log(filePath);
             if (fs.existsSync(filePath)) {
                 fs.unlinkSync(filePath);
             }
         }
 
-        // Delete the book from the database
         await book.deleteOne();
         res.json({ message: "Book deleted successfully", id });
     } catch (error) {
