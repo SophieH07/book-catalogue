@@ -23,7 +23,7 @@ Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)</br>
 Install [Node](https://nodejs.org/en/download/package-manager)</br>
 Install [MongoDB](https://www.mongodb.com/try/download/community)</br>
 
-### Starting with Docker
+## Starting with Docker
 
 **Building and Starting**
 
@@ -49,7 +49,7 @@ It may take some time to create everything.
 docker-compose down
 ```
 
-### Starting locally
+## Starting locally
 
 **Start MongoDB**
 
@@ -84,3 +84,10 @@ npm run dev
 ```
 
 The frontend should be available on http://localhost:39573.
+
+## Functionality
+
+- Add book -> dropdown, adds new book
+- All/Read/Unread tabs: shows all books by filter
+- Read/Unread checkboxs: toggles the read status and updates the last updated time -- also: if you stand on the Read or Unread tabs, it jumps back to All books
+- Delete: deletes book
