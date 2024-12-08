@@ -22,15 +22,30 @@ const upload = multer({ storage: storage });
 
 // Get all books
 router.get("/books", async (req, res) => {
-    const books = await Book.find().sort({ createdAt: -1 });
-    res.json(books);
+    try {
+        const books = await Book.find().sort({ createdAt: -1 });
+
+        if (!books) {
+            return res.status(404).send("Books not found");
+        }
+
+        res.json(books);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 //Get read/unread books
 router.get("/books/:read", async (req, res) => {
-    const { read } = req.params;
     try {
+        const { read } = req.params;
         const books = await Book.find({ read: read });
+
+        if (!books) {
+            return res.status(404).send("Books not found");
+        }
+
         res.json(books);
     } catch (error) {
         console.error(error);
@@ -40,9 +55,19 @@ router.get("/books/:read", async (req, res) => {
 
 // Get book
 router.get("/book/:id", async (req, res) => {
-    const { id } = req.params;
-    const book = await Book.findById(id);
-    res.json(book);
+    try {
+        const { id } = req.params;
+        const book = await Book.findById(id);
+
+        if (!book) {
+            return res.status(404).send("Book not found");
+        }
+
+        res.json(book);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 // Post a new book
