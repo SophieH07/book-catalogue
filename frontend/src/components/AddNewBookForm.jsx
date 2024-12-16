@@ -22,7 +22,7 @@ export default function AddNewBookForm({ fetchBooks, showAddForm }) {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      fetchBooks();
+      fetchBooks("all");
       setTitle("");
       setAuthor("");
       setCoverImage(null);

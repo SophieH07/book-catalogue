@@ -2,7 +2,7 @@ import { useState } from "react";
 import Filter from "./Filter";
 import AddNewBookForm from "./AddNewBookForm";
 
-export default function Navbar({ fetchBooks }) {
+export default function Navbar({ activeTab, fetchBooks }) {
   const [showAddForm, setShowAddForm] = useState(false);
 
   const toggleShowAddForm = () => {
@@ -11,6 +11,7 @@ export default function Navbar({ fetchBooks }) {
   return (
     <>
       <Filter
+        activeTab={activeTab}
         fetchBooks={fetchBooks}
         showAddForm={showAddForm}
         toggleShowAddForm={toggleShowAddForm}

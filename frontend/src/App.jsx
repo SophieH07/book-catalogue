@@ -6,12 +6,14 @@ import BookPic from "/book.png";
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [activeTab, setActiveTab] = useState(null);
 
   useEffect(() => {
     fetchBooks();
   }, []);
 
   const fetchBooks = async (filter = "all") => {
+    setActiveTab(filter);
     try {
       if (filter != "all") {
         const response = await axios.get(
@@ -36,7 +38,7 @@ function App() {
         <img src={BookPic} alt="Book Logo" className="max-h-16 max-w-16" />
         <h1 className="text-3xl font-bold text-center">Book Catalogue</h1>
       </div>
-      <Navbar fetchBooks={fetchBooks} />
+      <Navbar activeTab={activeTab} fetchBooks={fetchBooks} />
       {books && <BookList books={books} fetchBooks={fetchBooks} />}
     </div>
   );

@@ -1,18 +1,15 @@
-import { useState } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
-export default function Filter({ fetchBooks, showAddForm, toggleShowAddForm }) {
-  const [activeTab, setActiveTab] = useState(null);
-
-  const setActiveFilter = (filter) => {
-    setActiveTab(filter);
-    fetchBooks(filter);
-  };
-
+export default function Filter({
+  activeTab,
+  fetchBooks,
+  showAddForm,
+  toggleShowAddForm,
+}) {
   return (
     <div id="filter">
       <button
-        onClick={() => setActiveFilter("all")}
+        onClick={() => fetchBooks("all")}
         className={` ${
           (activeTab === "all" || activeTab === null) && "active-tab"
         }`}
@@ -20,13 +17,13 @@ export default function Filter({ fetchBooks, showAddForm, toggleShowAddForm }) {
         All books
       </button>
       <button
-        onClick={() => setActiveFilter(true)}
+        onClick={() => fetchBooks(true)}
         className={` ${activeTab === true && "active-tab"}`}
       >
         Read books
       </button>
       <button
-        onClick={() => setActiveFilter(false)}
+        onClick={() => fetchBooks(false)}
         className={` ${activeTab === false && "active-tab"}`}
       >
         Unread books
